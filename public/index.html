@@ -25,6 +25,14 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <meta name="google-site-verification" content="VZGnEz3QRBdhp6brONj_ezQLHEhN6mkzvBAN80-kugQ" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src='https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GOOGLE_ANALYTICS%'></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '%REACT_APP_GOOGLE_ANALYTICS%');
+    </script>
     <title>MC Devvo Soundboard</title>
   </head>
   <body>
