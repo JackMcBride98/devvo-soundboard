@@ -5,3 +5,23 @@
 html {
   background-color: #eddbb4;
 }
+
+.shadow-in {
+  box-shadow: 0px 0px 36px 18px rgba(135, 125, 102, 0.5);
+  transition: box-shadow 0.5s;
+  transition-timing-function: ease-in;
+  transition-timing-function: cubic-bezier(0.42, 0, 1, 1);
+}
+.shadow-out {
+  box-shadow: 0px 0px 0px 0px rgba(135, 125, 102, 0.25);
+  transition: box-shadow 0.5s;
+
+  transition-timing-function: ease-out;
+  transition-timing-function: cubic-bezier(0, 0, 0.58, 1);
+}
+
+/* Pre-render the bigger shadow, but hide it */
+
+.make-it-fast:hover::after {
+  opacity: 1;
+}
