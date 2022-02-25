@@ -11,17 +11,27 @@ type SoundButtonProps = {
 
 const SoundButton = ({ src, name, download }: SoundButtonProps) => {
   const audio = new Audio(src);
+  const [clicked, setClicked] = useState(false)
+  audio.onended = () => setTimeout(() => setClicked(false), 500 )
+  console.log(audio.onended)
   return (
-    <div className="bg-gradient-to-b even:from-[#CC9682] odd:to-[#CC9682] even:to-[#877D66] odd:from-[#877D66] p-2 border rounded-lg  border-[#A53E42] w-full h-full flex justify-center transition-shadow duration-1000 ease-out active:shadow-2xl">
+    <div className='relative rounded-lg'>
+
       <button
-        className={"font-semibold active:animate-bounce"}
+        className={"group peer z-50 relative font-semibold group  bg-gradient-to-b even:from-[#CC9682] odd:to-[#CC9682] even:to-[#877D66] odd:from-[#877D66] p-2 border rounded-lg  border-[#A53E42] w-full h-full flex justify-center " + (clicked ? 'shadow-in': 'shadow-out')}
         onMouseDown={() => audio.play()}
+        onClick={() => {
+          setClicked(true)
+        }}
       >
-        <p>{name}</p>
-        {download && (
+
+        <p className={"group-active:animate-bounce " + (clicked && 'animate-bounce')}>{name}</p>
+
+      </button>
+      {download && (
           <button
             onClick={() => saveAs(src, name)}
-            className="ml-2 bg-white p-1 rounded-lg hover:p-2 transition-all duration-300"
+            className="ml-2 bg-white mt-2  rounded-lg p-2  focus:bg-slate-100 focus:shadow-2xl"
           >
             <img
               src={require("./images/download.png")}
@@ -30,8 +40,8 @@ const SoundButton = ({ src, name, download }: SoundButtonProps) => {
             ></img>
           </button>
         )}
-      </button>
     </div>
+
   );
 };
 
@@ -236,6 +246,7 @@ function App() {
         ))}
       </div>
       <h1 className="text-3xl font-semibold mt-4">Original Video</h1>
+      <a href='https://www.youtube.com/watch?v=5I9EoGOKbyg' className="mt-2 text-blue-400 underline" rel="noreferrer" target="_blank" >Link</a>
       <div className="flex justify-center py-8">
         <iframe
           width="560"
