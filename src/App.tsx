@@ -1,14 +1,15 @@
 import './App.css';
 import devvo from './images/mc-devvo.jpeg';
 import githubLogo from './images/github-logo.png';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { saveAs } from 'file-saver';
 
-function shuffleArray(array: SoundButtonProps[]) {
+function shuffleArray(array: SoundButtonProps[]): Array<Sound> {
 	for (let i = array.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
 		[array[i], array[j]] = [array[j], array[i]];
 	}
+	return array;
 }
 
 type Sound = {
@@ -217,17 +218,12 @@ const SoundButton = ({ src, name, download }: SoundButtonProps) => {
 };
 
 function App() {
-	const [sounds, setSounds] = useState<Array<Sound>>();
-
-	useEffect(() => {
-		shuffleArray(theSounds);
-		setSounds(theSounds);
-	}, []);
+	const [sounds] = useState<Array<Sound>>(shuffleArray(theSounds));
 
 	const [download, setDownload] = useState(false);
 	return (
 		<div className="App flex flex-col mx-auto max-w-2xl text-[#231F20] static">
-			<div className="staticborder-t-0 border-4 border-[#231f20]">
+			<div className="static border-t-0 border-4 border-[#231f20]">
 				<img src={devvo} alt="MC Devvo" className="" />
 			</div>
 			<h1 className="absolute inset-x-0 top-[16%] text-2xl lg:text-5xl opacity-90 text-white">
